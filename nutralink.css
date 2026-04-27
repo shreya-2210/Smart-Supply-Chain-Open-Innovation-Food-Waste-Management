@@ -1,0 +1,606 @@
+/* styles.css - NutriLink India Main Stylesheet */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #0f5c3f;
+  --primary-dark: #0a402c;
+  --secondary: #2ba150;
+  --accent: #ffb74d;
+  --accent-dark: #ffa01e;
+  --light-bg: #e9f5ec;
+  --white: #ffffff;
+  --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --text-dark: #152f23;
+  --text-light: #4a6b5c;
+  --border-light: #e0ece0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8fef8;
+  color: var(--text-dark);
+  scroll-behavior: smooth;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+}
+
+h2:after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 70px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 1rem;
+  color: var(--primary);
+}
+
+h4 {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 8px rgba(15, 92, 63, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-claim {
+  background: var(--accent);
+  color: #2c2c2c;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-claim:hover {
+  background: var(--accent-dark);
+  transform: scale(1.02);
+}
+
+.small-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* Navigation */
+nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.logo-sub {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #1f3b2c;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #e9f9ef 0%, #d3ebdb 100%);
+  padding: 5rem 0;
+}
+
+.hero-grid {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-icon {
+  flex: 1;
+  text-align: center;
+}
+
+/* Form & Cards */
+.dashboard-panel {
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-top: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 180px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input, select, .form-input, .form-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid #cbdcd0;
+  background: #fefef7;
+  font-family: inherit;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.live-ticker {
+  background: var(--primary-dark);
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 60px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* Donation & Claim Cards */
+.donation-card, .claim-card {
+  background: var(--light-bg);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.feed-container {
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 28px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.food-item-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.badge-green {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 0.2rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-claimed {
+  background: #ffe0b5;
+  color: #b45f06;
+  padding: 0.2rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-live {
+  background: #ff4757;
+  color: white;
+  padding: 0.2rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  animation: pulse 1.5s infinite;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Claim Grid */
+.claim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.ngo-select {
+  width: auto;
+  min-width: 250px;
+  border-radius: 40px;
+}
+
+.ngo-register-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 28px;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Claimed Food Table */
+.table-wrapper {
+  background: white;
+  border-radius: 28px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.claimed-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.claimed-table th,
+.claimed-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0ece0;
+}
+
+.claimed-table th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+.claimed-table tr:hover {
+  background: #f9f9f9;
+}
+
+/* Map Styles */
+#liveMap {
+  height: 450px;
+  width: 100%;
+  border-radius: 28px;
+  margin-top: 1rem;
+  z-index: 1;
+  border: 3px solid var(--primary);
+}
+
+.map-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.donor-dot {
+  color: #0f5c3f;
+}
+
+.ngo-dot {
+  color: #ffb74d;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  flex: 1;
+  min-width: 180px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0.5rem 0;
+}
+
+/* Charts */
+.chart-container {
+  background: white;
+  border-radius: 28px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-top: 1.5rem;
+}
+
+canvas {
+  max-height: 280px;
+  width: 100%;
+}
+
+/* Tech Stack Section */
+.tech-stack-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.tech-badge {
+  background: #1a2e25;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 60px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tech-note {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.info-message {
+  margin-top: 1rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.section-sub {
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+}
+
+/* Section Background Variations */
+.section-alt {
+  background: #f0f7f2;
+}
+
+.section-warm {
+  background: #fffaf2;
+}
+
+.section-cream {
+  background: #fef9ef;
+}
+
+.section-map {
+  background: #fefcf5;
+}
+
+.section-white {
+  background: #ffffff;
+}
+
+.section-tech {
+  background: #eef3f0;
+}
+
+/* Footer */
+footer {
+  background: #0a2e21;
+  color: #cddfd7;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  
+  section {
+    padding: 3rem 0;
+  }
+  
+  .stats-grid {
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    min-width: 140px;
+  }
+  
+  .claim-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ngo-register-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .btn {
+    padding: 0.7rem 1.5rem;
+  }
+  
+  .dashboard-panel {
+    padding: 1rem;
+  }
+}

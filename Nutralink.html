@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>NutriLink India | Live Food Rescue Across 28 States · Smart Tracking</title>
+  <!-- Google Fonts + Font Awesome + Leaflet Maps + Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- external styles & modules -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="logo">Nutri<span>Link</span> 🇮🇳 <span class="logo-sub">India Food Rescue Network</span></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#donate-section">Donate Food</a>
+      <a href="#claim-section">Claim Food</a>
+      <a href="#claimed-food-section">📋 Claimed Food</a>
+      <a href="#live-tracking">Live Map (India)</a>
+      <a href="#tech-stack">Tech Stack</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>NutriLink India <br><span class="accent-text">Rescue Food Across 28 States</span></h1>
+        <p class="hero-sub">Live tracking across Maharashtra, Delhi, Karnataka, Tamil Nadu, Gujarat, West Bengal & all Indian states. Every donation updates instantly.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="scrollToDonateBtn"><i class="fas fa-utensils"></i> Donate Food (India)</button>
+          <button class="btn btn-outline" id="scrollToClaimNavBtn"><i class="fas fa-hand-holding-heart"></i> NGO: Claim Food</button>
+        </div>
+      </div>
+      <div class="hero-icon"><i class="fas fa-map-india"></i><img src="https://img.icons8.com/color/240/india-gate.png" width="160" alt="India"></div>
+    </div>
+  </section>
+
+  <!-- DONATE SECTION -->
+  <section id="donate-section" class="section-alt">
+    <div class="container">
+      <div class="live-ticker"><i class="fas fa-broadcast-tower"></i> 🇮🇳 INDIA LIVE FEED — Donations from all states appear instantly | Maharashtra • Delhi • Karnataka • Tamil Nadu • Gujarat • UP • West Bengal • Rajasthan • More</div>
+      <h2><i class="fas fa-cloud-upload-alt"></i> Donate Surplus Food (Any Indian State)</h2>
+      <div class="dashboard-panel">
+        <div class="form-row">
+          <div class="form-group"><label>Donor Name</label><input type="text" id="donorName" placeholder="Restaurant/Hotel" value="Delhi Darbar"></div>
+          <div class="form-group"><label>Food Type</label><input type="text" id="foodType" placeholder="e.g., Biryani, Dal" value="Vegetable Biryani"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Quantity (kg)</label><input type="number" id="foodQty" value="10" step="0.5"></div>
+          <div class="form-group">
+            <label>State / City</label>
+            <select id="donorLocation">
+              <option value="Mumbai, Maharashtra">Mumbai, Maharashtra</option><option value="Delhi, Delhi">Delhi, Delhi</option>
+              <option value="Bengaluru, Karnataka">Bengaluru, Karnataka</option><option value="Chennai, Tamil Nadu">Chennai, Tamil Nadu</option>
+              <option value="Ahmedabad, Gujarat">Ahmedabad, Gujarat</option><option value="Kolkata, West Bengal">Kolkata, West Bengal</option>
+              <option value="Hyderabad, Telangana">Hyderabad, Telangana</option><option value="Pune, Maharashtra">Pune, Maharashtra</option>
+              <option value="Jaipur, Rajasthan">Jaipur, Rajasthan</option><option value="Lucknow, Uttar Pradesh">Lucknow, Uttar Pradesh</option>
+              <option value="Chandigarh, Punjab">Chandigarh, Punjab</option><option value="Bhopal, Madhya Pradesh">Bhopal, Madhya Pradesh</option>
+              <option value="Bhubaneswar, Odisha">Bhubaneswar, Odisha</option><option value="Guwahati, Assam">Guwahati, Assam</option>
+              <option value="Patna, Bihar">Patna, Bihar</option><option value="Dehradun, Uttarakhand">Dehradun, Uttarakhand</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Expiry (hours left)</label><input type="number" id="expiryHrs" value="8"></div>
+          <div class="form-group"><label>Food Image URL</label><input type="text" id="foodImgUrl" placeholder="https://..." value="https://picsum.photos/id/108/100/100"></div>
+        </div>
+        <button id="postDonationBtn" class="btn-primary"><i class="fas fa-globe"></i> Post Donation → Nationwide Network</button>
+        <div id="postMessage" class="info-message"></div>
+      </div>
+
+      <h3><i class="fas fa-list"></i> Live Donations Feed (Across India)</h3>
+      <div id="liveDonationsFeed" class="feed-container"></div>
+    </div>
+  </section>
+
+  <!-- CLAIM SECTION -->
+  <section id="claim-section" class="section-warm">
+    <div class="container">
+      <h2><i class="fas fa-hand-holding-heart"></i> NGO: Claim Available Food (Any State)</h2>
+      <div class="flex-between claim-header">
+        <select id="ngoSelector" class="ngo-select">
+          <option value="">-- Select your NGO (India) --</option>
+        </select>
+        <button id="quickRegisterNgoBtn" class="btn-outline"><i class="fas fa-plus"></i> Register New NGO</button>
+      </div>
+      <div id="ngoRegisterForm" class="ngo-register-card hidden">
+        <input type="text" id="quickNgoName" placeholder="NGO Name" class="form-input"> 
+        <select id="quickNgoLocation" class="form-select">
+          <option value="Mumbai, Maharashtra">Mumbai, Maharashtra</option><option value="Delhi, Delhi">Delhi, Delhi</option>
+          <option value="Bengaluru, Karnataka">Bengaluru, Karnataka</option><option value="Chennai, Tamil Nadu">Chennai, Tamil Nadu</option>
+          <option value="Kolkata, West Bengal">Kolkata, West Bengal</option><option value="Hyderabad, Telangana">Hyderabad, Telangana</option>
+        </select>
+        <button id="confirmQuickNgoBtn" class="btn-primary">Register & Claim</button>
+      </div>
+      <div id="availableForClaimGrid" class="claim-grid"></div>
+      <button id="refreshAvailableBtn" class="btn-outline refresh-btn"><i class="fas fa-sync-alt"></i> Refresh Available</button>
+    </div>
+  </section>
+
+  <!-- CLAIMED FOOD LOG -->
+  <section id="claimed-food-section" class="section-cream">
+    <div class="container">
+      <h2><i class="fas fa-clipboard-list"></i> 📋 Claimed Food Log (India - Live Updates)</h2>
+      <p class="section-sub">Every claim from any Indian state appears here instantly. Full transparency across the nation.</p>
+      <div class="table-wrapper">
+        <table class="claimed-table" id="claimedFoodTable">
+          <thead><tr><th>Donor</th><th>Food Item</th><th>Quantity</th><th>Claimed By (NGO)</th><th>Location (State)</th><th>Status</th><th>Claimed At</th></tr></thead>
+          <tbody id="claimedTableBody"><tr><td colspan="7" style="text-align:center;">Loading claimed food across India...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MAP -->
+  <section id="live-tracking" class="section-map">
+    <div class="container">
+      <h2><i class="fas fa-map-marked-alt"></i> Live Tracking: Food Rescue Across India</h2>
+      <div id="liveMap"></div>
+      <div class="map-legend"><span><i class="fas fa-circle donor-dot"></i> Donor pickup</span> <span><i class="fas fa-circle ngo-dot"></i> NGO destination</span><button id="refreshMapBtn" class="btn-outline small-btn">Refresh Map</button></div>
+    </div>
+  </section>
+
+  <!-- IMPACT DASHBOARD + CHARTS -->
+  <section id="graphs" class="section-white">
+    <div class="container">
+      <h2><i class="fas fa-chart-line"></i> India Impact Dashboard (Auto-Update)</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><i class="fas fa-apple-alt fa-2x"></i><div class="stat-number" id="totalRescuedKg">0</div><h4>Total Rescued (kg) - India</h4></div>
+        <div class="stat-card"><i class="fas fa-leaf fa-2x"></i><div class="stat-number" id="co2Saved">0</div><h4>CO₂ Saved (kg)</h4></div>
+        <div class="stat-card"><i class="fas fa-utensils fa-2x"></i><div class="stat-number" id="mealsServed">0</div><h4>Meals Served</h4></div>
+        <div class="stat-card"><i class="fas fa-hand-holding-heart fa-2x"></i><div class="stat-number" id="activeNgos">0</div><h4>Active NGOs (India)</h4></div>
+      </div>
+      <div class="chart-container"><h3>📊 Daily Food Rescued Across India (Last 7 Days)</h3><canvas id="weeklyChart"></canvas></div>
+      <div class="chart-container"><h3>🍱 Rescued by Food Category (National)</h3><canvas id="categoryChart"></canvas></div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="tech-stack" class="section-tech">
+    <div class="container">
+      <h2>⚙️ Technology Stack — Pan-India Food Rescue Network</h2>
+      <div class="tech-stack-grid">
+        <span class="tech-badge"><i class="fab fa-react"></i> React.js UI</span>
+        <span class="tech-badge"><i class="fas fa-database"></i> LocalStorage + IndexedDB</span>
+        <span class="tech-badge"><i class="fas fa-chart-line"></i> Chart.js Live Graphs</span>
+        <span class="tech-badge"><i class="fas fa-map"></i> Leaflet + India Geo</span>
+        <span class="tech-badge"><i class="fas fa-brain"></i> AI Matching (State)</span>
+        <span class="tech-badge"><i class="fas fa-sync-alt"></i> Real-Time Sync</span>
+        <span class="tech-badge"><i class="fas fa-map-india"></i> 28 States Coverage</span>
+      </div>
+      <p class="tech-note">✅ Covering all Indian states & major cities — Every donation, claim, and rescue updates live.</p>
+    </div>
+  </section>
+
+  <footer><p>🌍 NutriLink India — National Food Rescue Network | Donate → Claim → Track → Zero Waste Across India</p></footer>
+</main>
+
+<!-- External JS modules: separated frontend & backend logic -->
+<script src="backend.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
